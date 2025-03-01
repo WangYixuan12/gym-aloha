@@ -85,10 +85,10 @@ class AlohaEnv(gym.Env):
 
         self.action_space = spaces.Box(low=-1, high=1, shape=(len(ACTIONS),), dtype=np.float32)
 
-    def render(self):
-        return self._render(visualize=True)
+    def render(self, camera_ids=["top"]):
+        return self._render(visualize=True, camera_ids=camera_ids)
 
-    def _render(self, visualize=False):
+    def _render(self, visualize=False, camera_ids=["top"]):
         assert self.render_mode == "rgb_array"
         width, height = (
             (self.visualization_width, self.visualization_height)
@@ -102,8 +102,10 @@ class AlohaEnv(gym.Env):
         # else:
         #     raise ValueError(mode)
         # TODO(rcadene): render and visualizer several cameras (e.g. angle, front_close)
-        image = self._env.physics.render(height=height, width=width, camera_id="top")
-        return image
+        render_dict = {}
+        for camera_id in camera_ids:
+            render_dict[camera_id] = self._env.physics.render(height=height, width=width, camera_id=camera_id)
+        return render_dict
 
     def _make_env_task(self, task_name):
         # time limit is controlled by StepCounter in env factory
