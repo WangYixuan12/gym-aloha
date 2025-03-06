@@ -44,11 +44,11 @@ class BimanualViperXTask(base.Task):
         left_gripper_action = unnormalize_puppet_gripper_position(normalized_left_gripper_action)
         right_gripper_action = unnormalize_puppet_gripper_position(normalized_right_gripper_action)
 
-        full_left_gripper_action = [left_gripper_action, -left_gripper_action]
-        full_right_gripper_action = [right_gripper_action, -right_gripper_action]
+        # full_left_gripper_action = [left_gripper_action, -left_gripper_action]
+        # full_right_gripper_action = [right_gripper_action, -right_gripper_action]
 
         env_action = np.concatenate(
-            [left_arm_action, full_left_gripper_action, right_arm_action, full_right_gripper_action]
+            [left_arm_action, np.array([left_gripper_action]), right_arm_action, np.array([right_gripper_action])]
         )
         super().before_step(env_action, physics)
         return
@@ -89,11 +89,16 @@ class BimanualViperXTask(base.Task):
         obs["qvel"] = self.get_qvel(physics)
         obs["env_state"] = self.get_env_state(physics)
         obs["images"] = {}
-        obs["images"]["top"] = physics.render(height=480, width=640, camera_id="top")
-        obs["images"]["angle"] = physics.render(height=480, width=640, camera_id="angle")
-        obs["images"]["vis"] = physics.render(height=480, width=640, camera_id="front_close")
-        obs["images"]["left_wrist"] = physics.render(height=480, width=640, camera_id="left_wrist")
-        obs["images"]["right_wrist"] = physics.render(height=480, width=640, camera_id="right_wrist")
+        # left_name = "vx300s_left"
+        # right_name = "vx300s_right"
+        # camera_names = ["top", "angle", "front_close", "left_wrist", "right_wrist"]
+        left_name = "left/base_link"
+        right_name = "right/base_link"
+        camera_names = ["teleoperator_pov", "collaborator_pov", "wrist_cam_left", "wrist_cam_right"]
+        obs["left_base"] = np.concatenate([physics.data.body(left_name).xpos, physics.data.body(left_name).xquat])
+        obs["right_base"] = np.concatenate([physics.data.body(right_name).xpos, physics.data.body(right_name).xquat])
+        for camera_name in camera_names:
+            obs["images"][camera_name] = physics.render(height=480, width=640, camera_id=camera_name)
 
         return obs
 
@@ -113,7 +118,8 @@ class TransferCubeTask(BimanualViperXTask):
         # reset qpos, control and box position
         with physics.reset_context():
             physics.named.data.qpos[:16] = START_ARM_POSE
-            np.copyto(physics.data.ctrl, START_ARM_POSE)
+            ctrl_data = np.concatenate([START_ARM_POSE[:7], START_ARM_POSE[8:15]])
+            np.copyto(physics.data.ctrl, ctrl_data)
             assert BOX_POSE[0] is not None
             physics.named.data.qpos[-7:] = BOX_POSE[0]
             # print(f"{BOX_POSE=}")
@@ -162,7 +168,8 @@ class InsertionTask(BimanualViperXTask):
         # reset qpos, control and box position
         with physics.reset_context():
             physics.named.data.qpos[:16] = START_ARM_POSE
-            np.copyto(physics.data.ctrl, START_ARM_POSE)
+            ctrl_data = np.concatenate([START_ARM_POSE[:7], START_ARM_POSE[8:15]])
+            np.copyto(physics.data.ctrl, ctrl_data)
             assert BOX_POSE[0] is not None
             physics.named.data.qpos[-7 * 2 :] = BOX_POSE[0]  # two objects
             # print(f"{BOX_POSE=}")
