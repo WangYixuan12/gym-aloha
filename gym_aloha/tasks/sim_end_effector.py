@@ -95,6 +95,15 @@ class BimanualViperXEndEffectorTask(base.Task):
         right_gripper_qpos = [normalize_puppet_gripper_position(right_qpos_raw[6])]
         return np.concatenate([left_arm_qpos, left_gripper_qpos, right_arm_qpos, right_gripper_qpos])
 
+    def set_qpos(self, physics, qpos) -> None:
+        left_arm = qpos[:6]
+        right_arm = qpos[7:13]
+        left_gripper_qpos = unnormalize_puppet_gripper_position(qpos[6])
+        right_gripper_qpos = unnormalize_puppet_gripper_position(qpos[13])
+        robot_qpos = np.concatenate([left_arm, np.ones(2) * left_gripper_qpos, right_arm, np.ones(2) * right_gripper_qpos])
+        new_qpos = np.concatenate([robot_qpos, qpos[14:]])
+        physics.data.qpos = new_qpos
+
     @staticmethod
     def get_qvel(physics):
         qvel_raw = physics.data.qvel.copy()

@@ -68,6 +68,15 @@ class BimanualViperXTask(base.Task):
         right_gripper_qpos = [normalize_puppet_gripper_position(right_qpos_raw[6])]
         return np.concatenate([left_arm_qpos, left_gripper_qpos, right_arm_qpos, right_gripper_qpos])
 
+    def set_qpos(self, physics, qpos) -> None:
+        left_arm = qpos[:6]
+        right_arm = qpos[7:13]
+        left_gripper_qpos = unnormalize_puppet_gripper_position(qpos[6])
+        right_gripper_qpos = unnormalize_puppet_gripper_position(qpos[13])
+        robot_qpos = np.concatenate([left_arm, np.ones(2) * left_gripper_qpos, right_arm, np.ones(2) * right_gripper_qpos])
+        new_qpos = np.concatenate([robot_qpos, qpos[14:]])
+        physics.data.qpos[:] = new_qpos
+
     @staticmethod
     def get_qvel(physics):
         qvel_raw = physics.data.qvel.copy()
@@ -94,7 +103,7 @@ class BimanualViperXTask(base.Task):
         # camera_names = ["top", "angle", "front_close", "left_wrist", "right_wrist"]
         left_name = "left/base_link"
         right_name = "right/base_link"
-        camera_names = ["teleoperator_pov", "collaborator_pov", "wrist_cam_left", "wrist_cam_right"]
+        camera_names = ["teleoperator_pov", "collaborator_pov", "wrist_cam_left", "wrist_cam_right", "top_pov", "closer_pov"]
         obs["left_base"] = np.concatenate([physics.data.body(left_name).xpos, physics.data.body(left_name).xquat])
         obs["right_base"] = np.concatenate([physics.data.body(right_name).xpos, physics.data.body(right_name).xquat])
         for camera_name in camera_names:
