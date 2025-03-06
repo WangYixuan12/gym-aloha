@@ -112,11 +112,11 @@ class AlohaEnv(gym.Env):
         time_limit = float("inf")
 
         if task_name == "transfer_cube":
-            xml_path = ASSETS_DIR / "bimanual_viperx_transfer_cube.xml"
+            xml_path = ASSETS_DIR / "aloha" / "bimanual_viperx_transfer_cube.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = TransferCubeTask()
         elif task_name == "insertion":
-            xml_path = ASSETS_DIR / "bimanual_viperx_insertion.xml"
+            xml_path = ASSETS_DIR / "aloha" / "bimanual_viperx_insertion.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = InsertionTask()
         elif task_name == "end_effector_transfer_cube":
@@ -141,7 +141,9 @@ class AlohaEnv(gym.Env):
         if self.obs_type == "state":
             raise NotImplementedError()
         elif self.obs_type == "pixels":
-            obs = {"top": raw_obs["images"]["top"].copy()}
+            obs = {}
+            for k in raw_obs["images"]:
+                obs[k] = raw_obs["images"][k].copy()
         elif self.obs_type == "pixels_agent_pos":
             obs = {
                 "pixels": {"top": raw_obs["images"]["top"].copy()},
