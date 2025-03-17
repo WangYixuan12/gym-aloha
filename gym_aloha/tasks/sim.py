@@ -36,6 +36,7 @@ class BimanualViperXTask(base.Task):
         super().__init__(random=random)
 
     def before_step(self, action, physics):
+        assert action.shape == (14,)
         left_arm_action = action[:6]
         right_arm_action = action[7 : 7 + 6]
         normalized_left_gripper_action = action[6]
