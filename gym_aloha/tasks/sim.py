@@ -5,10 +5,9 @@ from dm_control.suite import base
 
 from gym_aloha.constants import (
     START_ARM_POSE,
-    normalize_puppet_gripper_position,
     normalize_puppet_gripper_velocity,
-    unnormalize_puppet_gripper_position,
     convert_puppet_from_joint_to_position,
+    convert_puppet_from_position_to_joint,
 )
 
 BOX_POSE = [None]  # to be changed from outside
@@ -66,15 +65,15 @@ class BimanualViperXTask(base.Task):
         right_qpos_raw = qpos_raw[8:16]
         left_arm_qpos = left_qpos_raw[:6]
         right_arm_qpos = right_qpos_raw[:6]
-        left_gripper_qpos = [normalize_puppet_gripper_position(left_qpos_raw[6])]
-        right_gripper_qpos = [normalize_puppet_gripper_position(right_qpos_raw[6])]
+        left_gripper_qpos = [convert_puppet_from_position_to_joint(left_qpos_raw[6])]
+        right_gripper_qpos = [convert_puppet_from_position_to_joint(right_qpos_raw[6])]
         return np.concatenate([left_arm_qpos, left_gripper_qpos, right_arm_qpos, right_gripper_qpos])
 
     def set_qpos(self, physics, qpos) -> None:
         left_arm = qpos[:6]
         right_arm = qpos[7:13]
-        left_gripper_qpos = unnormalize_puppet_gripper_position(qpos[6])
-        right_gripper_qpos = unnormalize_puppet_gripper_position(qpos[13])
+        left_gripper_qpos = convert_puppet_from_joint_to_position(qpos[6])
+        right_gripper_qpos = convert_puppet_from_joint_to_position(qpos[13])
         robot_qpos = np.concatenate([left_arm, np.ones(2) * left_gripper_qpos, right_arm, np.ones(2) * right_gripper_qpos])
         new_qpos = np.concatenate([robot_qpos, qpos[14:]])
         physics.data.qpos[:] = new_qpos

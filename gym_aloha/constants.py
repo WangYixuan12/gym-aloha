@@ -72,13 +72,18 @@ ASSETS_DIR = Path(__file__).parent.resolve() / "assets"  # note: absolute path
 MASTER_GRIPPER_POSITION_OPEN = 0.02417
 MASTER_GRIPPER_POSITION_CLOSE = 0.01244
 PUPPET_GRIPPER_POSITION_OPEN = 0.037
-PUPPET_GRIPPER_POSITION_CLOSE = 0.006
+PUPPET_GRIPPER_POSITION_CLOSE = 0.002
 
 # Gripper joint limits (qpos[6])
 MASTER_GRIPPER_JOINT_OPEN = 0.80687392
 MASTER_GRIPPER_JOINT_CLOSE = -0.09510681
-PUPPET_GRIPPER_JOINT_OPEN = 0.469
-PUPPET_GRIPPER_JOINT_CLOSE = -0.315
+PUPPET_GRIPPER_JOINT_OPEN = 1.00
+PUPPET_GRIPPER_JOINT_CLOSE = 0.00
+
+PUPPET_GRIPPER_POSITION_OPEN_OLD = 0.05800
+PUPPET_GRIPPER_POSITION_CLOSE_OLD = 0.01844
+PUPPET_GRIPPER_JOINT_OPEN_OLD = 1.4910
+PUPPET_GRIPPER_JOINT_CLOSE_OLD = -0.6213
 
 MASTER_GRIPPER_JOINT_MID = (MASTER_GRIPPER_JOINT_OPEN + MASTER_GRIPPER_JOINT_CLOSE) / 2
 
@@ -104,6 +109,8 @@ def unnormalize_master_gripper_position(x):
 def unnormalize_puppet_gripper_position(x):
     return x * (PUPPET_GRIPPER_POSITION_OPEN - PUPPET_GRIPPER_POSITION_CLOSE) + PUPPET_GRIPPER_POSITION_CLOSE
 
+def unnormalize_puppet_gripper_position_old(x):
+    return x * (PUPPET_GRIPPER_POSITION_OPEN_OLD - PUPPET_GRIPPER_POSITION_CLOSE_OLD) + PUPPET_GRIPPER_POSITION_CLOSE_OLD
 
 def convert_position_from_master_to_puppet(x):
     return unnormalize_puppet_gripper_position(normalize_master_gripper_position(x))
@@ -116,6 +123,8 @@ def normalizer_master_gripper_joint(x):
 def normalize_puppet_gripper_joint(x):
     return (x - PUPPET_GRIPPER_JOINT_CLOSE) / (PUPPET_GRIPPER_JOINT_OPEN - PUPPET_GRIPPER_JOINT_CLOSE)
 
+def normalize_puppet_gripper_joint_old(x):
+    return (x - PUPPET_GRIPPER_JOINT_CLOSE_OLD) / (PUPPET_GRIPPER_JOINT_OPEN_OLD - PUPPET_GRIPPER_JOINT_CLOSE_OLD)
 
 def unnormalize_master_gripper_joint(x):
     return x * (MASTER_GRIPPER_JOINT_OPEN - MASTER_GRIPPER_JOINT_CLOSE) + MASTER_GRIPPER_JOINT_CLOSE
