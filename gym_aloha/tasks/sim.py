@@ -8,6 +8,7 @@ from gym_aloha.constants import (
     normalize_puppet_gripper_position,
     normalize_puppet_gripper_velocity,
     unnormalize_puppet_gripper_position,
+    convert_puppet_from_joint_to_position,
 )
 
 BOX_POSE = [None]  # to be changed from outside
@@ -42,8 +43,8 @@ class BimanualViperXTask(base.Task):
         normalized_left_gripper_action = action[6]
         normalized_right_gripper_action = action[7 + 6]
 
-        left_gripper_action = unnormalize_puppet_gripper_position(normalized_left_gripper_action)
-        right_gripper_action = unnormalize_puppet_gripper_position(normalized_right_gripper_action)
+        left_gripper_action = convert_puppet_from_joint_to_position(normalized_left_gripper_action)
+        right_gripper_action = convert_puppet_from_joint_to_position(normalized_right_gripper_action)
 
         # full_left_gripper_action = [left_gripper_action, -left_gripper_action]
         # full_right_gripper_action = [right_gripper_action, -right_gripper_action]
