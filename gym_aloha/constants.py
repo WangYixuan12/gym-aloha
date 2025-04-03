@@ -101,6 +101,11 @@ def normalize_puppet_gripper_position(x):
         PUPPET_GRIPPER_POSITION_OPEN - PUPPET_GRIPPER_POSITION_CLOSE
     )
 
+def normalize_puppet_gripper_position_old(x):
+    return (x - PUPPET_GRIPPER_POSITION_CLOSE_OLD) / (
+        PUPPET_GRIPPER_POSITION_OPEN_OLD - PUPPET_GRIPPER_POSITION_CLOSE_OLD
+    )
+
 
 def unnormalize_master_gripper_position(x):
     return x * (MASTER_GRIPPER_POSITION_OPEN - MASTER_GRIPPER_POSITION_CLOSE) + MASTER_GRIPPER_POSITION_CLOSE
@@ -133,6 +138,8 @@ def unnormalize_master_gripper_joint(x):
 def unnormalize_puppet_gripper_joint(x):
     return x * (PUPPET_GRIPPER_JOINT_OPEN - PUPPET_GRIPPER_JOINT_CLOSE) + PUPPET_GRIPPER_JOINT_CLOSE
 
+def unnormalize_puppet_gripper_joint_old(x):
+    return x * (PUPPET_GRIPPER_JOINT_OPEN_OLD - PUPPET_GRIPPER_JOINT_CLOSE_OLD) + PUPPET_GRIPPER_JOINT_CLOSE_OLD
 
 def convert_joint_from_master_to_puppet(x):
     return unnormalize_puppet_gripper_joint(normalizer_master_gripper_joint(x))
@@ -165,8 +172,18 @@ def convert_puppet_from_position_to_joint(x):
         + PUPPET_GRIPPER_JOINT_CLOSE
     )
 
+def convert_puppet_from_position_to_joint_old(x):
+    return (
+        normalize_puppet_gripper_position_old(x) * (PUPPET_GRIPPER_JOINT_OPEN_OLD - PUPPET_GRIPPER_JOINT_CLOSE_OLD)
+        + PUPPET_GRIPPER_JOINT_CLOSE_OLD
+    )
 
 def convert_puppet_from_joint_to_position(x):
     return unnormalize_puppet_gripper_position(
         (x - PUPPET_GRIPPER_JOINT_CLOSE) / (PUPPET_GRIPPER_JOINT_OPEN - PUPPET_GRIPPER_JOINT_CLOSE)
+    )
+
+def convert_puppet_from_joint_to_position_old(x):
+    return unnormalize_puppet_gripper_position_old(
+        (x - PUPPET_GRIPPER_JOINT_CLOSE_OLD) / (PUPPET_GRIPPER_JOINT_OPEN_OLD - PUPPET_GRIPPER_JOINT_CLOSE_OLD)
     )

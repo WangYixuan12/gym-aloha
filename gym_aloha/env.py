@@ -40,6 +40,10 @@ class AlohaEnv(gym.Env):
         self.observation_height = observation_height
         self.visualization_width = visualization_width
         self.visualization_height = visualization_height
+        self.curr_vel = np.zeros(14)
+        self.k_p, self.k_v = 100, 20  # PD control
+        self.dt = 1/30.
+        self.acc_lim = 2
 
         self._env = self._make_env_task(self.task)
 
@@ -177,8 +181,17 @@ class AlohaEnv(gym.Env):
     def step(self, action):
         assert action.ndim == 1
         # TODO(rcadene): add info["is_success"] and info["success"] ?
-
-        _, reward, _, raw_obs = self._env.step(action)
+        
+        obs = self._env.task.get_observation(self._env.physics)  # noqa
+        self.curr_pos = obs["qpos"].copy()
+        acceleration = self.k_p * (action - self.curr_pos) + self.k_v * (
+            np.zeros(14) - self.curr_vel
+        )
+        acceleration = np.clip(acceleration, -self.acc_lim, self.acc_lim)
+        self.curr_vel += acceleration * self.dt
+        pid_action = self.curr_pos + self.curr_vel * self.dt
+                
+        _, reward, _, raw_obs = self._env.step(pid_action)
 
         # TODO(rcadene): add an enum
         terminated = is_success = reward == 4
