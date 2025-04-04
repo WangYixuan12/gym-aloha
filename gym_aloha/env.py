@@ -17,6 +17,8 @@ from gym_aloha.tasks.sim_end_effector import (
 )
 from gym_aloha.utils import sample_box_pose, sample_insertion_pose
 
+from utils.real_time_plotter import RealTimePlotter
+
 
 class AlohaEnv(gym.Env):
     # TODO(aliberts): add "human" render_mode
@@ -40,10 +42,10 @@ class AlohaEnv(gym.Env):
         self.observation_height = observation_height
         self.visualization_width = visualization_width
         self.visualization_height = visualization_height
-        self.curr_vel = np.zeros(14)
-        self.k_p, self.k_v = 100, 20  # PD control
-        self.dt = 1/30.
-        self.acc_lim = 2
+        # self.curr_vel = np.zeros(14)
+        # self.k_p, self.k_v = 100, 20  # PD control
+        # self.dt = 1/30.
+        # self.acc_lim = 10
 
         self._env = self._make_env_task(self.task)
 
@@ -182,16 +184,39 @@ class AlohaEnv(gym.Env):
         assert action.ndim == 1
         # TODO(rcadene): add info["is_success"] and info["success"] ?
         
-        obs = self._env.task.get_observation(self._env.physics)  # noqa
-        self.curr_pos = obs["qpos"].copy()
-        acceleration = self.k_p * (action - self.curr_pos) + self.k_v * (
-            np.zeros(14) - self.curr_vel
-        )
-        acceleration = np.clip(acceleration, -self.acc_lim, self.acc_lim)
-        self.curr_vel += acceleration * self.dt
-        pid_action = self.curr_pos + self.curr_vel * self.dt
+        # DEBUG ONLY: add noise to the action
+        # if hasattr(self, "plotter"):
+        #     if self.iter // 10 == 0 or self.iter % 10 == 1:
+        #         action[8] += 0.5
+        
+        # obs = self._env.task.get_observation(self._env.physics)  # noqa
+        # self.curr_pos = obs["qpos"].copy()
+        # acceleration = self.k_p * (action - self.curr_pos) + self.k_v * (
+        #     np.zeros(14) - self.curr_vel
+        # )
+        # acceleration = np.clip(acceleration, -self.acc_lim, self.acc_lim)
+        # self.curr_vel += acceleration * self.dt
+        # pid_action = self.curr_pos + self.curr_vel * self.dt
+        
+        # ### DEBUG ONLY
+        # if not hasattr(self, "plotter"):
+        #     self.plotter = RealTimePlotter(
+        #         title="PD control",
+        #         window_size=300,
+        #         num_lines=2,
+        #         y_max=1,
+        #         y_min=-1,
+        #         legends=["target", "pid"],
+        #     )
+        #     self.iter = 0
+        # self.plotter.append(
+        #     np.array([self.iter]),
+        #     np.stack([action, pid_action], axis=1)[8:9],
+        # )
+        # self.iter += 1
+        # ### END OF DEBUG ONLY
                 
-        _, reward, _, raw_obs = self._env.step(pid_action)
+        _, reward, _, raw_obs = self._env.step(action)
 
         # TODO(rcadene): add an enum
         terminated = is_success = reward == 4
