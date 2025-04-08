@@ -243,17 +243,17 @@ class PushTTask(BimanualViperXTask):
         super().__init__(random=random)
         self.max_reward = 4
 
-    def sample_t_pose(self, seed=None):
+    def sample_t_pose(self):
         x_range = [-0.1, 0.1]
-        y_range = [0.3, 0.5]
+        y_range = [-0.1, 0.1]
         z_range = [0.05, 0.05]
 
-        rng = np.random.RandomState(seed)
+        rng = self.random
 
         ranges = np.vstack([x_range, y_range, z_range])
         cube_position = rng.uniform(ranges[:, 0], ranges[:, 1])
 
-        theta = np.random.uniform(0, 2 * np.pi)
+        theta = rng.uniform(0, 2 * np.pi)
         cube_mat = np.array([[np.cos(theta), -np.sin(theta), 0],
                              [np.sin(theta), np.cos(theta), 0],
                              [0, 0, 1]])
@@ -269,7 +269,8 @@ class PushTTask(BimanualViperXTask):
             physics.named.data.qpos[:16] = START_ARM_POSE
             ctrl_data = np.concatenate([START_ARM_POSE[:7], START_ARM_POSE[8:15]])
             np.copyto(physics.data.ctrl, ctrl_data)
-            physics.named.data.qpos[-7:] = self.sample_t_pose()
+            assert BOX_POSE[0] is not None
+            physics.named.data.qpos[-7:] = BOX_POSE[0]
         super().initialize_episode(physics)
 
     @staticmethod

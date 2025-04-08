@@ -15,7 +15,7 @@ from gym_aloha.tasks.sim_end_effector import (
     InsertionEndEffectorTask,
     TransferCubeEndEffectorTask,
 )
-from gym_aloha.utils import sample_box_pose, sample_insertion_pose
+from gym_aloha.utils import sample_box_pose, sample_insertion_pose, sample_pusht_pose
 
 from utils.real_time_plotter import RealTimePlotter
 
@@ -128,7 +128,7 @@ class AlohaEnv(gym.Env):
         elif task_name == "pusht":
             xml_path = ASSETS_DIR / "aloha" / "bimanual_viperx_pusht.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
-            task = PushTTask()
+            task = PushTTask(0)
         elif task_name == "end_effector_transfer_cube":
             raise NotImplementedError()
             xml_path = ASSETS_DIR / "bimanual_viperx_end_effector_transfer_cube.xml"
@@ -174,6 +174,8 @@ class AlohaEnv(gym.Env):
             BOX_POSE[0] = sample_box_pose(seed)  # used in sim reset
         elif self.task == "insertion":
             BOX_POSE[0] = np.concatenate(sample_insertion_pose(seed))  # used in sim reset
+        elif self.task == "pusht":
+            BOX_POSE[0] = sample_pusht_pose(seed)  # used in sim reset
         else:
             raise ValueError(self.task)
 

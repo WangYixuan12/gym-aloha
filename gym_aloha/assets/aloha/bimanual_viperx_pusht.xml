@@ -1,0 +1,88 @@
+<mujoco>
+    <include file="scene_push.xml"/>
+
+    <asset>
+        <mesh file="t_shape.stl" name="t_shape" scale="0.6 0.6 0.6" />
+        <mesh name="hull_0" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape000.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_1" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape001.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_2" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape002.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_3" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape003.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_4" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape004.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_5" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape005.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_6" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape006.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_7" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape007.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_8" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape008.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_9" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape009.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_10" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape010.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_11" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape011.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_12" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape012.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_13" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape013.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_14" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape014.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_15" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape015.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_16" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape016.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_17" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape017.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_18" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape018.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_19" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape019.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_20" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape020.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_21" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape021.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_22" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape022.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_23" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape023.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_24" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape024.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_25" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape025.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_26" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape026.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_27" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape027.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_28" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape028.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_29" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape029.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_30" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape030.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_31" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape031.obj" scale="0.6 0.6 0.6" />
+        <mesh name="hull_32" file="/home/yixuan/diffusion-forcing/external/gym-aloha/gym_aloha/assets/aloha/assets/t_convex/t_shape032.obj" scale="0.6 0.6 0.6" />
+    </asset>
+
+    <worldbody>
+        <body name="box" pos="0.2 0.5 0.05">
+            <joint name="pusht_joint" type="free" frictionloss="0.01" />
+            <inertial pos="0 0 0" mass="0.1" diaginertia="0.002 0.002 0.002" />
+            <geom contype="0" conaffinity="0" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" type="mesh" mesh="t_shape" name="pusht" rgba="1 0 0 1" class="visual" mass="0.1"/>
+            <geom name="hull_0_geom" type="mesh" mesh="hull_0" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_1_geom" type="mesh" mesh="hull_1" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_2_geom" type="mesh" mesh="hull_2" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_3_geom" type="mesh" mesh="hull_3" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_4_geom" type="mesh" mesh="hull_4" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_5_geom" type="mesh" mesh="hull_5" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_6_geom" type="mesh" mesh="hull_6" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_7_geom" type="mesh" mesh="hull_7" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_8_geom" type="mesh" mesh="hull_8" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_9_geom" type="mesh" mesh="hull_9" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_10_geom" type="mesh" mesh="hull_10" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_11_geom" type="mesh" mesh="hull_11" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_12_geom" type="mesh" mesh="hull_12" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_13_geom" type="mesh" mesh="hull_13" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_14_geom" type="mesh" mesh="hull_14" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_15_geom" type="mesh" mesh="hull_15" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_16_geom" type="mesh" mesh="hull_16" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_17_geom" type="mesh" mesh="hull_17" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_18_geom" type="mesh" mesh="hull_18" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_19_geom" type="mesh" mesh="hull_19" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_20_geom" type="mesh" mesh="hull_20" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_21_geom" type="mesh" mesh="hull_21" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_22_geom" type="mesh" mesh="hull_22" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_23_geom" type="mesh" mesh="hull_23" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_24_geom" type="mesh" mesh="hull_24" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_25_geom" type="mesh" mesh="hull_25" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_26_geom" type="mesh" mesh="hull_26" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_27_geom" type="mesh" mesh="hull_27" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_28_geom" type="mesh" mesh="hull_28" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_29_geom" type="mesh" mesh="hull_29" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_30_geom" type="mesh" mesh="hull_30" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_31_geom" type="mesh" mesh="hull_31" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+            <geom name="hull_32_geom" type="mesh" mesh="hull_32" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />
+        </body>
+
+    </worldbody>
+
+    <keyframe>
+        <key qpos="0 -0.96 1.16 0 -0.3 0 0.024 -0.024  0 -0.96 1.16 0 -0.3 0 0.024 -0.024  0.2 0.5 0.05 1 0 0 0"/>
+    </keyframe>
+
+
+</mujoco>
