@@ -2,6 +2,7 @@ import collections
 
 import numpy as np
 from dm_control.suite import base
+import transforms3d
 
 from gym_aloha.constants import (
     START_ARM_POSE,
@@ -236,3 +237,46 @@ class InsertionTask(BimanualViperXTask):
         if pin_touched:  # successful insertion
             reward = 4
         return reward
+
+class PushTTask(BimanualViperXTask):
+    def __init__(self, random=None):
+        super().__init__(random=random)
+        self.max_reward = 4
+
+    def sample_t_pose(self, seed=None):
+        x_range = [-0.1, 0.1]
+        y_range = [0.3, 0.5]
+        z_range = [0.05, 0.05]
+
+        rng = np.random.RandomState(seed)
+
+        ranges = np.vstack([x_range, y_range, z_range])
+        cube_position = rng.uniform(ranges[:, 0], ranges[:, 1])
+
+        theta = np.random.uniform(0, 2 * np.pi)
+        cube_mat = np.array([[np.cos(theta), -np.sin(theta), 0],
+                             [np.sin(theta), np.cos(theta), 0],
+                             [0, 0, 1]])
+        cube_quat = transforms3d.quaternions.mat2quat(cube_mat)
+
+        return np.concatenate([cube_position, cube_quat])
+    
+    def initialize_episode(self, physics):
+        """Sets the state of the environment at the start of each episode."""
+        # TODO Notice: this function does not randomize the env configuration. Instead, set BOX_POSE from outside
+        # reset qpos, control and box position
+        with physics.reset_context():
+            physics.named.data.qpos[:16] = START_ARM_POSE
+            ctrl_data = np.concatenate([START_ARM_POSE[:7], START_ARM_POSE[8:15]])
+            np.copyto(physics.data.ctrl, ctrl_data)
+            physics.named.data.qpos[-7:] = self.sample_t_pose()
+        super().initialize_episode(physics)
+
+    @staticmethod
+    def get_env_state(physics):
+        env_state = physics.data.qpos.copy()[16:]
+        return env_state
+
+    def get_reward(self, physics):
+        return 1
+    
