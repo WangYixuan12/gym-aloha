@@ -3,6 +3,7 @@ import numpy as np
 from dm_control import mujoco
 from dm_control.rl import control
 from gymnasium import spaces
+import transforms3d
 
 from gym_aloha.constants import (
     ACTIONS,
@@ -112,6 +113,76 @@ class AlohaEnv(gym.Env):
         for camera_id in camera_ids:
             render_dict[camera_id] = self._env.physics.render(height=height, width=width, camera_id=camera_id)
         return render_dict
+
+    def get_cam_intrinsic(self, camera_id: str, img_shape: tuple[int, int]) -> np.ndarray:
+        """
+        Returns 3x3 intrinsic matrix K for an MJCF-defined camera.
+        Focal is derived from MuJoCo's vertical FOV at the requested resolution.
+        """
+        physics = self._env.physics
+        m = physics.model
+        height, width = img_shape
+
+        # camera numeric id
+        cam_id = mujoco.mj_name2id(m._model, mujoco.mjtObj.mjOBJ_CAMERA, camera_id)
+
+        # MuJoCo stores vertical FOV in degrees
+        fovy_deg = float(m.cam_fovy[cam_id])
+        fovy = np.deg2rad(fovy_deg)
+
+        # standard pinhole: fy from vertical FOV; fx from aspect
+        fy = 0.5 * height / np.tan(0.5 * fovy)
+        fovx = 2.0 * np.arctan((width / height) * np.tan(0.5 * fovy))
+        fx = 0.5 * width / np.tan(0.5 * fovx)
+
+        # principal point at image center (MuJoCo uses square pixels; centered frustum)
+        cx, cy = (width - 1) * 0.5, (height - 1) * 0.5
+
+        K = np.array([[fx, 0.0, cx],
+                      [0.0, fy, cy],
+                      [0.0, 0.0, 1.0]], dtype=np.float64)
+        return K
+
+    # === New: camera extrinsics in OpenCV convention ===
+    def get_cam_extrinsic(self, camera_id: str) -> np.ndarray:
+        """
+        Returns (R, t) where X_cam = R * X_world + t, using OpenCV camera axes:
+          +x right, +y down, +z forward.
+        """
+        physics = self._env.physics
+        m, d = physics.model, physics.data
+
+        # camera numeric id and attachment body
+        cam_id = mujoco.mj_name2id(m._model, mujoco.mjtObj.mjOBJ_CAMERA, camera_id)
+        body_id = int(m.cam_bodyid[cam_id])
+
+        # camera pose relative to its body (model coordinates)
+        t_b_c = np.array(m.cam_pos[cam_id], dtype=np.float64)     # (3,)
+        q_b_c = np.array(m.cam_quat[cam_id], dtype=np.float64)    # (w,x,y,z)
+        R_b_c = transforms3d.quaternions.quat2mat(q_b_c)
+
+        # body world pose at the current step (data "x*" = global/world frame)
+        R_w_b = np.array(d.xmat[body_id]).reshape(3, 3)
+        t_w_b = np.array(d.xpos[body_id])
+
+        # compose: camera pose in world (MuJoCo camera axes)
+        R_w_c_mj = R_w_b @ R_b_c
+        t_w_c    = t_w_b + R_w_b @ t_b_c
+
+        # world->camera extrinsics in MuJoCo camera axes
+        R_c_w_mj = R_w_c_mj.T
+        t_c_w_mj = -R_c_w_mj @ t_w_c
+
+        # Convert to OpenCV axes: (x,y,z)_cv = ( +x, -y, -z )_mj
+        A = np.diag([1.0, -1.0, -1.0])             # axis flip matrix
+        R_c_w_cv = A @ R_c_w_mj
+        t_c_w_cv = A @ t_c_w_mj
+
+        pose = np.eye(4)
+        pose[:3, :3] = R_c_w_cv
+        pose[:3, 3] = t_c_w_cv
+
+        return pose
 
     def _make_env_task(self, task_name):
         # time limit is controlled by StepCounter in env factory

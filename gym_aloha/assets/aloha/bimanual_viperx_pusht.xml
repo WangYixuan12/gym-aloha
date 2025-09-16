@@ -1,46 +1,52 @@
 <mujoco>
     <include file="scene_push.xml"/>
 
+    <!-- <body name="t_shape" pos="0.0 0.0 0.07">
+        <geom name="top_bar" type="box" size="0.08 0.020 0.020" pos="0 0 0.012" rgba="1 0 0 1"/>
+        <geom name="post" type="box" size="0.020 0.020 0.060" pos="0 0 -0.048" rgba="1 0 0 1"/>
+    </body> -->
     <asset>
-        <mesh file="t_shape.stl" name="t_shape" scale="0.6 0.6 0.6" />
-        <mesh name="hull_0" file="t_convex/t_shape000.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_1" file="t_convex/t_shape001.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_2" file="t_convex/t_shape002.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_3" file="t_convex/t_shape003.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_4" file="t_convex/t_shape004.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_5" file="t_convex/t_shape005.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_6" file="t_convex/t_shape006.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_7" file="t_convex/t_shape007.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_8" file="t_convex/t_shape008.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_9" file="t_convex/t_shape009.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_10" file="t_convex/t_shape010.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_11" file="t_convex/t_shape011.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_12" file="t_convex/t_shape012.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_13" file="t_convex/t_shape013.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_14" file="t_convex/t_shape014.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_15" file="t_convex/t_shape015.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_16" file="t_convex/t_shape016.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_17" file="t_convex/t_shape017.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_18" file="t_convex/t_shape018.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_19" file="t_convex/t_shape019.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_20" file="t_convex/t_shape020.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_21" file="t_convex/t_shape021.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_22" file="t_convex/t_shape022.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_23" file="t_convex/t_shape023.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_24" file="t_convex/t_shape024.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_25" file="t_convex/t_shape025.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_26" file="t_convex/t_shape026.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_27" file="t_convex/t_shape027.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_28" file="t_convex/t_shape028.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_29" file="t_convex/t_shape029.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_30" file="t_convex/t_shape030.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_31" file="t_convex/t_shape031.obj" scale="0.6 0.6 0.6" />
-        <mesh name="hull_32" file="t_convex/t_shape032.obj" scale="0.6 0.6 0.6" />
+        <mesh file="t_shape.stl" name="t_shape" scale="0.8 0.8 0.8" />
+        <mesh name="hull_0" file="t_convex/t_shape000.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_1" file="t_convex/t_shape001.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_2" file="t_convex/t_shape002.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_3" file="t_convex/t_shape003.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_4" file="t_convex/t_shape004.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_5" file="t_convex/t_shape005.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_6" file="t_convex/t_shape006.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_7" file="t_convex/t_shape007.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_8" file="t_convex/t_shape008.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_9" file="t_convex/t_shape009.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_10" file="t_convex/t_shape010.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_11" file="t_convex/t_shape011.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_12" file="t_convex/t_shape012.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_13" file="t_convex/t_shape013.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_14" file="t_convex/t_shape014.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_15" file="t_convex/t_shape015.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_16" file="t_convex/t_shape016.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_17" file="t_convex/t_shape017.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_18" file="t_convex/t_shape018.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_19" file="t_convex/t_shape019.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_20" file="t_convex/t_shape020.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_21" file="t_convex/t_shape021.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_22" file="t_convex/t_shape022.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_23" file="t_convex/t_shape023.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_24" file="t_convex/t_shape024.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_25" file="t_convex/t_shape025.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_26" file="t_convex/t_shape026.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_27" file="t_convex/t_shape027.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_28" file="t_convex/t_shape028.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_29" file="t_convex/t_shape029.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_30" file="t_convex/t_shape030.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_31" file="t_convex/t_shape031.obj" scale="0.8 0.8 0.8" />
+        <mesh name="hull_32" file="t_convex/t_shape032.obj" scale="0.8 0.8 0.8" />
     </asset>
 
     <worldbody>
-        <body name="box" pos="0.2 0.5 0.05">
+        <body name="box" pos="0.0 0.0 0.07">
             <joint name="pusht_joint" type="free" frictionloss="0.01" />
+            <!-- <geom name="top_bar" type="box" size="0.08 0.020 0.020" pos="0 0 0.012" rgba="1 0 0 1"/>
+            <geom name="post"    type="box" size="0.020 0.020 0.060" pos="0 0 -0.048" rgba="1 0 0 1"/> -->
             <inertial pos="0 0 0" mass="0.1" diaginertia="0.002 0.002 0.002" />
             <geom contype="0" conaffinity="0" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" type="mesh" mesh="t_shape" name="pusht" rgba="1 0 0 1" class="visual" mass="0.1"/>
             <geom name="hull_0_geom" type="mesh" mesh="hull_0" contype="1" conaffinity="1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="0.01 0.01 0.01" pos="0 0 0" class="collision" mass="0.1" />

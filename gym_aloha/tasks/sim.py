@@ -105,7 +105,8 @@ class BimanualViperXTask(base.Task):
         # camera_names = ["top", "angle", "front_close", "left_wrist", "right_wrist"]
         left_name = "left/base_link"
         right_name = "right/base_link"
-        camera_names = ["teleoperator_pov", "collaborator_pov", "wrist_cam_left", "wrist_cam_right", "top_pov", "closer_pov"]
+        camera_names = ["top_pov"]
+        # camera_names = ["teleoperator_pov", "collaborator_pov", "wrist_cam_left", "wrist_cam_right", "top_pov", "closer_pov"]
         obs["left_base"] = np.concatenate([physics.data.body(left_name).xpos, physics.data.body(left_name).xquat])
         obs["right_base"] = np.concatenate([physics.data.body(right_name).xpos, physics.data.body(right_name).xquat])
         for camera_name in camera_names:

@@ -17,7 +17,7 @@ def sample_box_pose(seed=None):
 def sample_pusht_pose(seed=None):
     x_range = [-0.1, 0.1]
     y_range = [-0.1, 0.1]
-    z_range = [0.05, 0.05]
+    z_range = [0.07, 0.07]
 
     rng = np.random.RandomState(seed)
 
