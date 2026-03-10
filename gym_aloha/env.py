@@ -18,8 +18,6 @@ from gym_aloha.tasks.sim_end_effector import (
 )
 from gym_aloha.utils import sample_box_pose, sample_insertion_pose, sample_pusht_pose
 
-from utils.real_time_plotter import RealTimePlotter
-
 
 class AlohaEnv(gym.Env):
     # TODO(aliberts): add "human" render_mode
